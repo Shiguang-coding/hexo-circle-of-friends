@@ -8,6 +8,9 @@ on:
     - cron: "0 0,6,12,18,21 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 env:
   CARGO_TERM_COLOR: always
   # 在这里查看需要添加的secert
