@@ -183,7 +183,10 @@ jobs:
           echo "Condition check: ${{ env.SIMPLE_MODE == 'true' }}"
 
       - name: Pull before push
-        run: git pull --rebase origin main
+        run: |
+          git stash
+          git pull --rebase origin main
+          git stash pop || true
       - name: Push sqlite data # sqlite push
         if: ${{ env.DATABASE == 'sqlite' }}
         uses: EndBug/add-and-commit@v9
