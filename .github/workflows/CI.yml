@@ -182,6 +182,8 @@ jobs:
           echo "SIMPLE_MODE value: ${{ env.SIMPLE_MODE }}"
           echo "Condition check: ${{ env.SIMPLE_MODE == 'true' }}"
 
+      - name: Pull before push
+        run: git pull --rebase origin main
       - name: Push sqlite data # sqlite push
         if: ${{ env.DATABASE == 'sqlite' }}
         uses: EndBug/add-and-commit@v9
@@ -189,7 +191,6 @@ jobs:
           add: "data.db --force"
           message: "Update data.db"
           default_author: github_actions
-          pull: "true"
       - name: simple mode push # 推送极简模式
         if: ${{ env.SIMPLE_MODE == 'true' }}
         uses: EndBug/add-and-commit@v9
@@ -197,7 +198,6 @@ jobs:
           add: "data.json --force"
           message: "Update data.json"
           default_author: github_actions
-          pull: "true"
 
   keepalive-workflow:
     name: Keepalive Workflow
